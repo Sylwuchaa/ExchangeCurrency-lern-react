@@ -8,9 +8,11 @@ class App extends React.Component {
     amountEuros: null,
   }
   handleChange = (e) => {
-    const value = e.target.value >= 0 ? e.target.value : alert('enter only positive number')
+    // const value = e.target.value >= 0 ? e.target.value : alert('enter only positive number')
+    // if (e.target.value < 0) return alert('enter only positive number')
     this.setState({
-      value,
+      value: e.target.value
+      //value,
 
     })
     this.setState((state) => {
@@ -34,6 +36,7 @@ class App extends React.Component {
         />
         <p>$$$: {this.state.amountDollars}</p>
         <p>EUR: {this.state.amountEuros}</p>
+        {this.state.value < 0 ? <h3 className="alert">Warning! please enter only positive number!</h3> : null}
       </div>
     </>
     )
