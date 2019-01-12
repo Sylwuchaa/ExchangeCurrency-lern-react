@@ -1,7 +1,7 @@
 class App extends React.Component {
 
   state = {
-    ratioDollars: 3.8,
+    ratioDollars: 3.77,
     ratioEuros: 4.2,
     value: '',
     amountDollars: null,
@@ -36,7 +36,7 @@ class App extends React.Component {
         />
         <p>$$$: {this.state.amountDollars}</p>
         <p>EUR: {this.state.amountEuros}</p>
-        {this.state.value < 0 ? <h3 className="alert">Warning! please enter only positive number!</h3> : null}
+        <div className="warning-container">{this.state.value < 0 ? <h3 className="alert">Warning! please enter only positive number!</h3> : null}</div>
       </div>
     </>
     )
