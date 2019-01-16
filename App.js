@@ -36,7 +36,7 @@
 //         />
 //         <p>$$$: {this.state.amountDollars}</p>
 //         <p>EUR: {this.state.amountEuros}</p>
-//         <div className="warning-container">{this.state.value < 0 ? <h3 className="alert">Warning! please enter only positive number!</h3> : null}</div>
+        // <div className="warning-container">{this.state.value < 0 ? <h3 className="alert">Warning! please enter only positive number!</h3> : null}</div>
 //       </div>
 //     </>
 //     )
@@ -46,6 +46,50 @@
 
 ///////////////////////////////////// version 2.0 //////////////////////////////////
 
+// const Cash = (props) => {
+//   const amount = (props.cash / props.ratio).toFixed(2)
+//   return (
+//   <p>Amount in {props.title}: {amount}</p>
+//   )
+// }
+// class App extends React.Component {
+
+  // state = {
+  //   value: '',
+  //   ratioDollars: 3.77,
+  //   ratioEuros: 4.20,
+  //   amount: '',
+  // }
+  // currency = [
+  //   {id: 1, name: 'euro', ratio: 4.2 },
+  //   {id: 2, name: 'dollar', ratio: 3.77 },
+  //   {id: 3, name: 'pound', ratio: 4.2 },
+  // ]
+
+  // handleChange = (e) => {
+  //   this.setState({
+  //     value: e.target.value
+  //   })
+  // }
+
+//   render () {
+//     return (
+      // <>
+      // <div className="container">
+      //   <input type="number"
+      //   onChange ={this.handleChange}
+      //   value={this.state.value}
+      //   />
+      //   <Cash ratio={this.state.ratioDollars} cash={this.state.value} title={'$$$'}/>
+      //   <Cash ratio={this.state.ratioEuros} cash={this.state.value} title={'EUR'}/>
+      // </div>
+      // </>
+//     )
+//   }
+// }
+// ReactDOM.render(<App />, document.getElementById('root'))
+
+/////////////////////////// version 3.0 /////////////////////////////////
 const Cash = (props) => {
   const amount = (props.cash / props.ratio).toFixed(2)
   return (
@@ -53,12 +97,8 @@ const Cash = (props) => {
   )
 }
 class App extends React.Component {
-
   state = {
     value: '',
-    ratioDollars: 3.77,
-    ratioEuros: 4.20,
-    amount: '',
   }
   currency = [
     {id: 1, name: 'euro', ratio: 4.2 },
@@ -71,22 +111,28 @@ class App extends React.Component {
       value: e.target.value
     })
   }
+  render() {
 
-  render () {
+
+    const calculators = this.currency.map(currency => (
+      <Cash key={currency.id} ratio={currency.ratio} title={currency.name} cash={this.state.value} />
+    ))
     return (
       <>
       <div className="container">
         <input type="number"
         onChange ={this.handleChange}
         value={this.state.value}
+        placeholder='in zł'
         />
-        <Cash ratio={this.state.ratioDollars} cash={this.state.value} title={'$$$'}/>
-        <Cash ratio={this.state.ratioEuros} cash={this.state.value} title={'EUR'}/>
+        {calculators}
+        <div className="warning-container">{this.state.value < 0 ? <h3 className="alert">Warning! please enter only positive number!</h3> : null}</div>
       </div>
       </>
+
+
+
     )
   }
 }
 ReactDOM.render(<App />, document.getElementById('root'))
-
-/////////////////////////// version 3.0 /////////////////////////////////
